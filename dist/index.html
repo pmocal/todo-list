@@ -1,0 +1,26 @@
+<!-- todo items: title, due date, priority. have folders but also a default folder. -->
+<!-- separate DOM modification from state maintenance. -->
+<!-- UI lets you see folders, or see todos in a particular folder, or let you examine a todo -->
+<!-- use localstorage to save user stuff between sessions -->
+<!-- use date-fns library with webpack -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href='style.css' rel='stylesheet' type='text/css'></link>
+	</head>
+	<body>
+		<div>
+			<h1>Default notebook</h1>
+			<div id="todo-list"></div>
+			<form id="form">
+				duedate: <input type="text" id="duedate"><br>
+				title: <input type="text" id="title"><br>
+				priority: <input type="text" id="priority"><br>
+				<input id="submit-todo" value="Submit" type="button">
+			</form>
+			<button id="new-todo">New todo in this notebook</button>
+		</div>
+	</body>
+</html>
+<script src="main.js"></script>
