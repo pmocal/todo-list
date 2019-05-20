@@ -1,7 +1,8 @@
-function attachTodoCreationForm() {
-	document.getElementById("default-new-todo").addEventListener("click",
+function attachTodoCreationForm(string) {
+	document.getElementById("new-todo").addEventListener("click",
 		function(){
-			document.getElementById("default-todo-form").style.display = "block";
+			document.getElementById("todo-form").style.display = "block";
+			document.getElementById("notebook-form").style.display = "none";
 		}
 	);
 }
@@ -9,14 +10,15 @@ function attachTodoCreationForm() {
 function attachNotebookCreationForm() {
 	document.getElementById("new-notebook").addEventListener("click",
 		function(){
+			document.getElementById("todo-form").style.display = "none";
 			document.getElementById("notebook-form").style.display = "block";
 		}
 	);
 }
 
-function addTodoDOM(string) {
-	document.getElementById("default-todo-form").style.display = "none";
-	document.getElementById("default-todo-list").innerHTML += "<p>" + string + "</p>";
+function addTodoDOM(string, notebook) {
+	document.getElementById("todo-form").style.display = "none";
+	document.getElementById(notebook + "-todo-list").innerHTML += "<p>" + string + "</p>";
 }
 
 function addNotebookDOM(string) {
@@ -24,7 +26,7 @@ function addNotebookDOM(string) {
 	var element = document.createElement("div");
 	element.id = string + "-todo-list";
 	element.innerHTML = "<h2>" + string + "</h2>";
-	document.body.appendChild(element);
+	document.body.insertBefore(element, document.getElementsByTagName('button')[0]);
 }
 
 export { attachTodoCreationForm, attachNotebookCreationForm, addNotebookDOM, addTodoDOM }
