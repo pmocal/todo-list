@@ -16,9 +16,19 @@ function attachNotebookCreationForm() {
 	);
 }
 
-function addTodoDOM(string, notebook) {
+function addTodoDOM(string, notebook, priority) {
+	var colorAttr;
 	document.getElementById("todo-form").style.display = "none";
-	document.getElementById(notebook + "-todo-list").innerHTML += "<p>" + string + "</p>";
+	if (document.getElementById("priority").value === "high") {
+		colorAttr = "red"
+	}
+	else if (document.getElementById("priority").value === "medium") {
+		colorAttr = "orange";
+	}
+	else if (document.getElementById("priority").value === "low") {
+		colorAttr = "yellow";
+	}
+	document.getElementById(notebook + "-todo-list").innerHTML += "<p style='color:" + colorAttr + ";'>" + string + "</p>";
 }
 
 function addNotebookDOM(string) {
