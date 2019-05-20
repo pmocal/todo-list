@@ -18,10 +18,14 @@
 		<button id="new-notebook">New notebook</button>
 		<br><br>
 		<form id="todo-form">
-			duedate: <input type="text" id="duedate"><br>
-			title: <input type="text" id="title"><br>
-			priority: <input type="text" id="priority"><br>
-			notebook: <input type="text" value="default" id="notebook"><br>
+			Due date: <input type="text" id="duedate"><br>
+			Title: <input type="text" id="title"><br>
+			Priority: <select id="priority">
+			  <option>High</option>
+			  <option>Medium</option>
+			  <option>Low</option>
+			</select>
+			Notebook: <input type="text" value="default" id="notebook"><br>
 			<input id="submit-todo" value="Submit" type="button">
 		</form>
 		<form id="notebook-form">

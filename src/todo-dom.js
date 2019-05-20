@@ -19,13 +19,13 @@ function attachNotebookCreationForm() {
 function addTodoDOM(string, notebook, priority) {
 	var colorAttr;
 	document.getElementById("todo-form").style.display = "none";
-	if (document.getElementById("priority").value === "high") {
+	if (document.getElementById("priority").value === "High") {
 		colorAttr = "red"
 	}
-	else if (document.getElementById("priority").value === "medium") {
+	else if (document.getElementById("priority").value === "Medium") {
 		colorAttr = "orange";
 	}
-	else if (document.getElementById("priority").value === "low") {
+	else if (document.getElementById("priority").value === "Low") {
 		colorAttr = "yellow";
 	}
 	document.getElementById(notebook + "-todo-list").innerHTML += "<p style='color:" + colorAttr + ";'>" + string + "</p>";
