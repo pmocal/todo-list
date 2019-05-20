@@ -1,14 +1,30 @@
 function attachTodoCreationForm() {
-	document.getElementById("new-todo").addEventListener("click",
+	document.getElementById("default-new-todo").addEventListener("click",
 		function(){
-			document.getElementById("form").style.display = "block";
+			document.getElementById("default-todo-form").style.display = "block";
+		}
+	);
+}
+
+function attachNotebookCreationForm() {
+	document.getElementById("new-notebook").addEventListener("click",
+		function(){
+			document.getElementById("notebook-form").style.display = "block";
 		}
 	);
 }
 
 function addTodoDOM(string) {
-	document.getElementById("form").style.display = "none";
-	document.getElementById("todo-list").innerHTML += "<p>" + string + "</p>";
+	document.getElementById("default-todo-form").style.display = "none";
+	document.getElementById("default-todo-list").innerHTML += "<p>" + string + "</p>";
 }
 
-export { attachTodoCreationForm, addTodoDOM }
+function addNotebookDOM(string) {
+	document.getElementById("notebook-form").style.display = "none";
+	var element = document.createElement("div");
+	element.id = string + "-todo-list";
+	element.innerHTML = "<h2>" + string + "</h2>";
+	document.body.appendChild(element);
+}
+
+export { attachTodoCreationForm, attachNotebookCreationForm, addNotebookDOM, addTodoDOM }

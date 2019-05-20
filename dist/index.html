@@ -12,14 +12,19 @@
 	<body>
 		<div>
 			<h1>Default notebook</h1>
-			<div id="todo-list"></div>
-			<form id="form">
-				duedate: <input type="text" id="duedate"><br>
-				title: <input type="text" id="title"><br>
-				priority: <input type="text" id="priority"><br>
-				<input id="submit-todo" value="Submit" type="button">
+			<div id="default-todo-list"></div>
+			<form id="default-todo-form">
+				duedate: <input type="text" id="default-duedate"><br>
+				title: <input type="text" id="default-title"><br>
+				priority: <input type="text" id="default-priority"><br>
+				<input id="default-submit-todo" value="Submit" type="button">
 			</form>
-			<button id="new-todo">New todo in this notebook</button>
+			<button id="default-new-todo">New todo in default notebook</button>
+			<form id="notebook-form">
+				name: <input type="text" id="name"><br>
+				<input id="submit-notebook" value="Submit" type="button">
+			</form>
+			<button id="new-notebook">New notebook</button>
 		</div>
 	</body>
 </html>

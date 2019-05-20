@@ -7,8 +7,11 @@ class Todo {
 }
 
 function addTodoAppLogic(duedate, title, priority){
-	return new Todo(document.getElementById("duedate").value, document.getElementById("title").value,
-		document.getElementById("priority").value);
+	return new Todo(duedate, title, priority);
 }
 
-export default addTodoAppLogic
+function addNotebookAppLogic(name) {
+
+}
+
+export { addTodoAppLogic, addNotebookAppLogic }
