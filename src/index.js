@@ -5,10 +5,10 @@ attachTodoCreationForm("default");
 attachNotebookCreationForm();
 
 document.getElementById("submit-todo").addEventListener("click", function(){
-	addTodoDOM(JSON.stringify(addTodoAppLogic(document.getElementById("duedate").value,
+	addTodoDOM(addTodoAppLogic(document.getElementById("duedate").value,
 		document.getElementById("title").value,
-		document.getElementById("priority").value)), document.getElementById("notebook").value,
-	document.getElementById("priority").value);
+		document.getElementById("priority").value,
+		document.getElementById("notebook").value));
 });
 
 document.getElementById("submit-notebook").addEventListener("click", function(){
