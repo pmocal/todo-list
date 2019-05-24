@@ -18,25 +18,35 @@ function attachNotebookCreationForm() {
 
 function addTodoDOM(obj) {
 
-	var colorAttr;
 	document.getElementById("todo-form").style.display = "none";
 
-	if (obj.priority === "High") {
-		colorAttr = "red"
-	}
-	else if (obj.priority === "Medium") {
-		colorAttr = "orange";
-	}
-	else if (obj.priority === "Low") {
-		colorAttr = "yellow";
-	}
+	var colorAttr = getColor(obj);
+
+	var todoDiv = showMoreLessDiv(obj, colorAttr);
+	document.getElementById(obj.notebook + "-todo-list").appendChild(todoDiv);
+
+}
+
+function addNotebookDOM(string) {
+	document.getElementById("notebook-form").style.display = "none";
+	var element = document.createElement("div");
+	element.id = string + "-todo-list";
+	element.innerHTML = "<h2>" + string + "</h2>";
+	document.body.insertBefore(element, document.getElementsByTagName('button')[0]);
+}
+
+function showMoreLessDiv(obj, colorAttr) {
+	var todoDiv = document.createElement("div");
 
 	var div1 = document.createElement("div");
 	div1.id = obj.notebook + "-" + obj.title + "-" + "div1";
 
+	//lessdiv
+
 	var element1 = document.createElement("p");
 	element1.innerHTML = obj.toString();
 	element1.style.color = colorAttr;
+	element1.style.display = "inline";
 
 	var element3 = document.createElement("span");
 	element3.innerHTML = "Show more";
@@ -46,9 +56,12 @@ function addTodoDOM(obj) {
 		document.getElementById(obj.notebook + "-" + obj.title + "-" + "div2").style.display = "block";
 	});
 
+
 	div1.appendChild(element1);
 	div1.appendChild(element3);
-	document.getElementById(obj.notebook + "-todo-list").appendChild(div1);
+	todoDiv.appendChild(div1);
+
+	//morediv
 
 	var div2 = document.createElement("div");
 	div2.id = obj.notebook + "-" + obj.title + "-" + "div2";
@@ -68,17 +81,27 @@ function addTodoDOM(obj) {
 
 	div2.appendChild(element2);
 	div2.appendChild(element4);
-	document.getElementById(obj.notebook + "-todo-list").appendChild(div2);
 	div2.style.display = "none";
+	todoDiv.appendChild(div2);
 
+	return todoDiv;
 }
 
-function addNotebookDOM(string) {
-	document.getElementById("notebook-form").style.display = "none";
-	var element = document.createElement("div");
-	element.id = string + "-todo-list";
-	element.innerHTML = "<h2>" + string + "</h2>";
-	document.body.insertBefore(element, document.getElementsByTagName('button')[0]);
+function getColor(obj) {
+	var colorAttr = "";
+	if (obj.priority === "High") {
+		colorAttr = "red"
+	}
+	else if (obj.priority === "Medium") {
+		colorAttr = "orange";
+	}
+	else if (obj.priority === "Low") {
+		colorAttr = "yellow";
+	}
+	else {
+		colorAttr = "black";
+	}
+	return colorAttr;
 }
 
 export { attachTodoCreationForm, attachNotebookCreationForm, addNotebookDOM, addTodoDOM }
