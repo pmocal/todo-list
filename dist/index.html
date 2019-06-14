@@ -13,24 +13,26 @@
 		<h1>TO DO LIST</h1>
 		<br>
 		<h2>Default notebook</h2>
+		<p>&nbsp;name due date</p>
 		<div id="default-todo-list"></div>
 		<button id="new-todo">New todo</button>
 		<button id="new-notebook">New notebook</button>
 		<br><br>
 		<form id="todo-form">
-			Due date: <input type="text" id="duedate"><br>
-			Title: <input type="text" id="title"><br>
-			Priority: <select id="priority">
+			Due date: <input type="text" name="duedate"><br>
+			Title: <input type="text" name="title"><br>
+			Priority: <select name="priority">
 			  <option>High</option>
 			  <option>Medium</option>
 			  <option>Low</option>
 			</select>
-			Notebook: <input type="text" value="default" id="notebook"><br>
-			<input id="submit-todo" value="Submit" type="button">
+			Notebook: <input type="text" value="default" name="notebook"><br>
+			<input name="submit-todo" value="Submit" class="new" type="button">
+			<input name="old-name" type="hidden">
 		</form>
 		<form id="notebook-form">
-			name: <input type="text" id="name">
-			<input id="submit-notebook" value="Submit" type="button">
+			name: <input type="text" name="name">
+			<input name="submit-notebook" value="Submit" type="button">
 		</form>
 	</body>
 </html>

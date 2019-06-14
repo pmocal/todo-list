@@ -10,14 +10,18 @@ class Todo {
 	toString() {
 		return this.title + " " + this.duedate;
 	}
+
+	todoString() {
+		return this.notebook + "-" + this.title;
+	}
 }
 
 function addTodoAppLogic(duedate, title, priority, notebook){
 	return new Todo(duedate, title, priority, notebook);
 }
 
-function addNotebookAppLogic(name) {
-
+function editTodoAppLogic(duedate, title, priority, notebook){
+	return new Todo(duedate, title, priority, notebook);
 }
 
-export { addTodoAppLogic, addNotebookAppLogic }
+export { addTodoAppLogic, editTodoAppLogic }

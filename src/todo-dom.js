@@ -1,4 +1,4 @@
-function attachTodoCreationForm(string) {
+function attachTodoCreationForm() {
 	document.getElementById("new-todo").addEventListener("click",
 		function(){
 			document.getElementById("todo-form").style.display = "block";
@@ -18,84 +18,123 @@ function attachNotebookCreationForm() {
 
 function addTodoDOM(obj) {
 
+	var colorAttr = getColor(obj.priority);
 	document.getElementById("todo-form").style.display = "none";
 
-	var colorAttr = getColor(obj);
+	var todoDiv = document.createElement("div");
+	todoDiv.appendChild(moreDiv(obj, colorAttr));
+	todoDiv.appendChild(lessDiv(obj, colorAttr));
+	todoDiv.appendChild(editDiv(obj, colorAttr));
 
-	var todoDiv = showMoreLessDiv(obj, colorAttr);
 	document.getElementById(obj.notebook + "-todo-list").appendChild(todoDiv);
+}
 
+function editTodoDOM(oldTodoString, newObj) {
+	var colorAttr = getColor(newObj.priority);
+	document.getElementById("todo-form").style.display = "none";
+
+	document.getElementById(oldTodoString +
+		"-more-div").getElementsByTagName('p')[0].innerHTML = JSON.stringify(newObj);
+
+	var todoLessDivContents = document.getElementById(oldTodoString +
+		"-less-div").getElementsByTagName('p')[0];
+	todoLessDivContents.innerHTML = newObj.toString();
+	todoLessDivContents.style.color = colorAttr;
 }
 
 function addNotebookDOM(string) {
+	
 	document.getElementById("notebook-form").style.display = "none";
 	var element = document.createElement("div");
 	element.id = string + "-todo-list";
-	element.innerHTML = "<h2>" + string + "</h2>";
-	document.body.insertBefore(element, document.getElementsByTagName('button')[0]);
+	element.innerHTML = "<h2>" + string + "</h2><p>name due date</p>";
+
+	document.body.insertBefore(element,
+		document.getElementsByTagName('button')[document.getElementsByTagName('button').length-2]);
 }
 
-function showMoreLessDiv(obj, colorAttr) {
-	var todoDiv = document.createElement("div");
-
-	var div1 = document.createElement("div");
-	div1.id = obj.notebook + "-" + obj.title + "-" + "div1";
-
-	//lessdiv
-
-	var element1 = document.createElement("p");
-	element1.innerHTML = obj.toString();
-	element1.style.color = colorAttr;
-	element1.style.display = "inline";
-
-	var element3 = document.createElement("span");
-	element3.innerHTML = "Show more";
-	element3.style.display = "inline";
-	element3.addEventListener("click", function() {
-		document.getElementById(obj.notebook + "-" + obj.title + "-" + "div1").style.display = "none";
-		document.getElementById(obj.notebook + "-" + obj.title + "-" + "div2").style.display = "block";
+function editDiv(obj) {
+	var div = document.createElement("div");
+	var button = document.createElement("button");
+	button.innerHTML = "Edit";
+	button.style.display = "inline";
+	button.addEventListener("click", function(){
+		document.querySelectorAll('[name="duedate"]')[0].value = obj.duedate;
+		document.querySelectorAll('[name="title"]')[0].value = obj.title;
+		document.querySelectorAll('[name="priority"]')[0].value = obj.priority;
+		document.querySelectorAll('[name="notebook"]')[0].value = obj.notebook;
+		document.querySelectorAll('[name="submit-todo"]')[0].className = "edit";
+		document.querySelectorAll('[name="old-name"]')[0].value = obj.todoString();
+		document.getElementById("todo-form").style.display = "block";
 	});
-
-
-	div1.appendChild(element1);
-	div1.appendChild(element3);
-	todoDiv.appendChild(div1);
-
-	//morediv
-
-	var div2 = document.createElement("div");
-	div2.id = obj.notebook + "-" + obj.title + "-" + "div2";
-	
-	var element2 = document.createElement("p");
-	element2.innerHTML = JSON.stringify(obj);
-	element2.id = obj.notebook + "-" + obj.title + "-" + "more";
-	element2.style.color = colorAttr;
-
-	var element4 = document.createElement("span");
-	element4.innerHTML = "Show less";
-	element4.style.display = "inline";
-	element4.addEventListener("click", function() {
-		document.getElementById(obj.notebook + "-" + obj.title + "-" + "div2").style.display = "none";
-		document.getElementById(obj.notebook + "-" + obj.title + "-" + "div1").style.display = "block";
-	});
-
-	div2.appendChild(element2);
-	div2.appendChild(element4);
-	div2.style.display = "none";
-	todoDiv.appendChild(div2);
-
-	return todoDiv;
+	div.appendChild(button);
+	return div;
 }
 
-function getColor(obj) {
+function deleteDiv(obj) {
+	document.createElement("button");
+}
+
+function lessDiv(obj, colorAttr) {
+	//this is the div with toString() and show more button to see expanded todo
+	var div = document.createElement("div");
+	div.id = obj.todoString() + "-less-div";
+	var p = document.createElement("p");
+	p.innerHTML = obj.toString();
+	p.style.color = colorAttr;
+	p.style.display = "inline";
+	//show more button helper
+	div.appendChild(p);
+	div.appendChild(createShowMoreButton(obj));
+	return div;
+}
+
+function createShowMoreButton(obj) {
+	var span = document.createElement("span");
+	span.innerHTML = "Show more";
+	span.style.display = "inline";
+	span.addEventListener("click", function() {
+		document.getElementById(obj.todoString() + "-less-div").style.display = "none";
+		document.getElementById(obj.todoString() + "-more-div").style.display = "block";
+	});
+	return span;
+}
+
+function moreDiv(obj, colorAttr) {
+	//this is the div with all attributes shown and a show less button
+	var div = document.createElement("div");
+	div.id = obj.todoString() + "-more-div";
+	var p = document.createElement("p");
+	p.innerHTML = JSON.stringify(obj);
+	p.style.color = colorAttr;
+	p.style.display = "inline";
+	//show less button helper
+	div.appendChild(p);
+	div.appendChild(createShowLessButton(obj));
+	div.style.display = "none";
+	return div;
+}
+
+function createShowLessButton(obj) {
+	var span = document.createElement("span");
+	span.innerHTML = "Show less";
+	span.style.display = "inline";
+	span.addEventListener("click", function() {
+		document.getElementById(obj.todoString() + "-more-div").style.display = "none";
+		document.getElementById(obj.todoString() + "-less-div").style.display = "block";
+	});
+	return span;
+}
+
+function getColor(priority) {
 	var colorAttr = "";
-	if (obj.priority === "High") {
+	if (priority === "High") {
 		colorAttr = "red"
 	}
-	else if (obj.priority === "Medium") {
+	else if (priority === "Medium") {
 		colorAttr = "orange";
 	}
-	else if (obj.priority === "Low") {
+	else if (priority === "Low") {
 		colorAttr = "yellow";
 	}
 	else {
@@ -104,4 +143,4 @@ function getColor(obj) {
 	return colorAttr;
 }
 
-export { attachTodoCreationForm, attachNotebookCreationForm, addNotebookDOM, addTodoDOM }
+export { attachTodoCreationForm, attachNotebookCreationForm, addNotebookDOM, addTodoDOM, editTodoDOM }
