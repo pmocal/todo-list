@@ -24,4 +24,7 @@ function editTodoAppLogic(duedate, title, priority, notebook){
 	return new Todo(duedate, title, priority, notebook);
 }
 
-export { addTodoAppLogic, editTodoAppLogic }
+function deleteTodoAppLogic(){
+}
+
+export { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic }
