@@ -42,10 +42,14 @@ function editTodoDOM(oldTodoString, newObj) {
 }
 
 function deleteTodoDOM(todoString) {
+	document.getElementById("delete-form").style.display = "none";
 	var elem = document.getElementById(document.querySelectorAll('[name="delete-name"]')[0].value + "-more-div");
 	elem.parentNode.removeChild(elem);
 	elem = document.getElementById(document.querySelectorAll('[name="delete-name"]')[0].value + "-less-div");
 	elem.parentNode.removeChild(elem);
+	elem = document.getElementById(document.querySelectorAll('[name="delete-name"]')[0].value + "-edit-delete-div");
+	elem.parentNode.removeChild(elem);
+
 }
 
 function addNotebookDOM(string) {
@@ -64,6 +68,7 @@ function addNotebookDOM(string) {
 
 function editDeleteDiv(obj) {
 	var div = document.createElement("div");
+	div.id = obj.todoString() + "-edit-delete-div";
 	var editButton = document.createElement("button");
 	editButton.innerHTML = "Edit";
 	editButton.style.display = "inline";
