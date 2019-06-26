@@ -1,6 +1,8 @@
-import { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic, addNotebookAppLogic } from './todo-applogic.js';
+import { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic, addNotebookAppLogic, load } from './todo-applogic.js';
 import { attachTodoCreationForm, attachNotebookCreationForm,
 	addTodoDOM, addNotebookDOM, editTodoDOM, deleteTodoDOM } from './todo-dom.js';
+
+var loaded = load();
 
 attachTodoCreationForm();
 attachNotebookCreationForm();
@@ -16,7 +18,8 @@ document.querySelectorAll('[name="submit-todo"]')[0].addEventListener("click", f
 		var todo = editTodoAppLogic(document.querySelectorAll('[name="duedate"]')[0].value,
 			document.querySelectorAll('[name="title"]')[0].value,
 			document.querySelectorAll('[name="priority"]')[0].value,
-			document.querySelectorAll('[name="notebook"]')[0].value);
+			document.querySelectorAll('[name="notebook"]')[0].value,
+			document.querySelectorAll('[name="old-name"]')[0].value);
 		editTodoDOM(document.querySelectorAll('[name="old-name"]')[0].value, todo);
 		document.querySelectorAll('[name="submit-todo"]')[0].className = "new";
 	}
@@ -28,7 +31,7 @@ document.querySelectorAll('[name="submit-notebook"]')[0].addEventListener("click
 
 document.querySelectorAll('[name="delete-todo"]')[0].addEventListener("click", function(){
 	deleteTodoDOM(document.querySelectorAll('[name="delete-name"]')[0].value);
-	deleteTodoAppLogic();
+	deleteTodoAppLogic(document.querySelectorAll('[name="delete-name"]')[0].value);
 });
 
 document.querySelectorAll('[name="cancel-delete"]')[0].addEventListener("click", function(){

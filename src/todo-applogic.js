@@ -16,15 +16,25 @@ class Todo {
 	}
 }
 
+function load() {
+	window.localStorage.clear();
+}
+
 function addTodoAppLogic(duedate, title, priority, notebook){
-	return new Todo(duedate, title, priority, notebook);
+	var obj = new Todo(duedate, title, priority, notebook);
+	window.localStorage.setItem(obj.todoString(), JSON.stringify(obj));
+	return obj;
 }
 
-function editTodoAppLogic(duedate, title, priority, notebook){
-	return new Todo(duedate, title, priority, notebook);
+function editTodoAppLogic(duedate, title, priority, notebook, oldTodoString){
+	window.localStorage.removeItem(oldTodoString);
+	var obj = new Todo(duedate, title, priority, notebook);
+	window.localStorage.setItem(obj.todoString(), JSON.stringify(obj));
+	return obj;
 }
 
-function deleteTodoAppLogic(){
+function deleteTodoAppLogic(todoString){
+	window.localStorage.removeItem(todoString);
 }
 
-export { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic }
+export { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic, load }
