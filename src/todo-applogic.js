@@ -16,7 +16,7 @@ class Todo {
 	}
 }
 
-function assignToTodo(JSONObj) {
+function assignObjToTodo(JSONObj) {
 	return Object.assign(new Todo, JSONObj);
 }
 
@@ -37,4 +37,4 @@ function deleteTodoAppLogic(todoString){
 	window.localStorage.removeItem(todoString);
 }
 
-export { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic, assignToTodo }
+export { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic, assignObjToTodo }
