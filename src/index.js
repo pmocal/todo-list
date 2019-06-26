@@ -1,8 +1,10 @@
-import { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic, addNotebookAppLogic, load } from './todo-applogic.js';
+import { addTodoAppLogic, editTodoAppLogic, deleteTodoAppLogic, addNotebookAppLogic, assignToTodo } from './todo-applogic.js';
 import { attachTodoCreationForm, attachNotebookCreationForm,
 	addTodoDOM, addNotebookDOM, editTodoDOM, deleteTodoDOM } from './todo-dom.js';
 
-var loaded = load();
+for (var i = 0; i < localStorage.length; i++){
+    addTodoDOM(assignToTodo(JSON.parse(localStorage.getItem(localStorage.key(i)))));
+}
 
 attachTodoCreationForm();
 attachNotebookCreationForm();
